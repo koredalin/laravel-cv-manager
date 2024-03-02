@@ -4,12 +4,10 @@
 
 @section('content')
 
-<div id="top_scores">
-    <h1>@yield('title')</h1>
+<h1>@yield('title')</h1>
     
-    <div>
-        @include('cvs.create')
-    </div>
+<div id="body_container">
+  @include('cvs.create')
 </div>
 
 <div id="internal_links">

@@ -1,6 +1,4 @@
-.container,
-#quotes_container,
-#guest_users_container {
+.container {
     width: 80%;
     margin: 0 auto;
     min-height: 100vh;
@@ -10,5 +8,29 @@
 }
 
 .container {
-    background-color: #ededed;
+    /*background-color: #ededed;*/
+    background-color: #ffaa55;
+}
+
+h1 {
+    text-align: center;
+}
+
+#body_container {
+    min-width: 350px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-control-container {
+  display: flex;
+  align-items: flex-start; /* Позиционира input и бутона в началото (върха), спрямо тяхната вертикална ос */
+}
+
+.btn {
+  margin-left: 10px; /* Добавя малко разстояние между input и бутона */
+}
+
+#skills {
+    max-height: 100pt
 }
