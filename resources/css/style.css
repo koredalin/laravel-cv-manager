@@ -16,7 +16,7 @@ h1 {
     text-align: center;
 }
 
-#body_container {
+.form-container {
     min-width: 350px;
     max-width: 400px;
     margin: 0 auto;
@@ -33,4 +33,48 @@ h1 {
 
 #skills {
     max-height: 100pt
+}
+
+/* Стилове за модала */
+.modal {
+  display: none; /* Скрит по подразбиране */
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  min-width: 350px;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Стилове за съдържанието на модала */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% от върха и центриран */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Можете да регулирате ширината според нуждите */
+  margin: 70px auto 0 auto;
+  min-width: 350px;
+}
+
+/* Стилове за бутона за затваряне */
+.university-close,
+.skill-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.university-close:hover,
+.university-close:focus,
+.skill-close:hover,
+.skill-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

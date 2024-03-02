@@ -21,10 +21,10 @@
 <body>
 
     <div class="container">
-    @section('content')
-        This is the master sidebar.
-    @show
+        @yield('content')
     </div>
+  
+    @stack('scripts')
     
 </body>
 
