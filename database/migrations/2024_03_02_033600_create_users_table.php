@@ -16,10 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('middle_name');
             $table->string('surname');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->date('dob');
+            $table->foreignId('university_id')->nullable()->constrained()->noActionOnUpdate()->noActionOnDelete();
             $table->timestamps();
         });
     }
