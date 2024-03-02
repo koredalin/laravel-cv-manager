@@ -6,12 +6,13 @@
 
 <div id="top_scores">
     <h1>@yield('title')</h1>
-    <h2>Top Scores</h2>
     
-    
+    <div>
+        @include('cvs.create')
+    </div>
 </div>
 
 <div id="internal_links">
-  <?php //<p><a href="{{ route('questionnaires') }}">Questionnaires List</a></p> ?>
+  <?php //<p><a href="{{ route('statistics') }}">Statistics</a></p> ?>
 </div>
 @endsection
