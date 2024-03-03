@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('dob');
             $table->foreignId('university_id')->nullable()->constrained()->noActionOnUpdate()->noActionOnDelete();
             $table->timestamps();
+            $table->unique(['name', 'middle_name', 'surname', 'dob',]);
         });
     }
 
