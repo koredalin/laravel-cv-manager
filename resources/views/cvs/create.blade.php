@@ -102,6 +102,7 @@
 </div>
 
 @push('scripts')
+  <script src="/js/get_add_user.js"></script>
   <script src="/js/add_university.js"></script>
   <script src="/js/add_skill.js"></script>
 @endpush

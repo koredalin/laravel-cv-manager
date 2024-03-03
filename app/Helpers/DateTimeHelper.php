@@ -21,4 +21,9 @@ class DateTimeHelper
     {
         return new DateTime();
     }
+    
+    public static function createFromDate(string $date, string $format = 'Y-m-d'): DateTime
+    {
+        return DateTime::createFromFormat($format, $date);
+    }
 }

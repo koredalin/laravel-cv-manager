@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GuestUser;
-
 class HomeController extends Controller
 {
     public function index()
