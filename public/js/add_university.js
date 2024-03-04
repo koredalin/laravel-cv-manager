@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   let addUniBtn = document.getElementById("add_university");
   let universityModal = document.getElementById("university_modal_container");
   let closeUniModalBtn = document.getElementsByClassName("university-close")[0];
-  let errorsModal = document.getElementById('university_modal_errors');
+  let newUniModalErrors = document.getElementById('university_modal_errors');
 
   addUniBtn.onclick = function () {
     universityModal.style.display = "block";
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
       assessment: document.getElementById('assessment_modal').value
     };
 
-    // Изпращане на заявка към бекенда
+    // Backend request.
     fetch('/api/university/add_one', {
       method: 'POST',
       headers: {
@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
       body: JSON.stringify(formData)
     })
       .then(response => {
-        errorsModal.innerHTML = '';
+        newUniModalErrors.innerHTML = '';
         if (response.ok) {
-          errorsModal.classList.add('hidden');
+          newUniModalErrors.classList.add('hidden');
 
           return response.json();
         }
@@ -54,11 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
         throw new Error('Network response was not ok');
       })
       .then(data => {
-        let errors = document.getElementById('university_modal_errors');
-        errors.innerHTML = '';
+        newUniModalErrors.innerHTML = '';
 //        console.log(data);
         if (!data.success) {
-          errors.innerHTML = data.message;
+          newUniModalErrors.innerHTML = data.message;
           return;
         }
 
@@ -69,19 +68,18 @@ document.addEventListener('DOMContentLoaded', function () {
         closeUniversityModal();
       })
       .catch(errors => {
-        errorsModal.classList.remove('hidden');
+        newUniModalErrors.classList.remove('hidden');
         console.error('Error:', errors);
         if (errors instanceof Error) {
           // System errors.
-          console.error(errors.message);
+//          console.error(errors.message);
           errors.innerHTML = errors.message;
         } else {
           // Validation errors.
-//        console.error(errors);
 //        console.log(errors.errors);
           Array.from(errors.errors).forEach((message) => {
             console.log(message);
-            errorsModal.innerHTML += message + '</br>';
+            newUniModalErrors.innerHTML += message + '</br>';
           });
         }
       });

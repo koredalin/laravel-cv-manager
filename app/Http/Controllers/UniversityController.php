@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
 use App\Services\UniversityService;
+use Illuminate\Support\Facades\Log;
 
 class UniversityController extends Controller
 {
@@ -40,6 +41,7 @@ class UniversityController extends Controller
         } catch (\Exception $e) {
             $success = false;
             $message = 'Моля, опитайте по-късно.';
+            Log::error($e->getMessage());
             $university = null;
         }
 

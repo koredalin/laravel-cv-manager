@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
 use App\Services\SkillService;
+use Illuminate\Support\Facades\Log;
 
 class SkillController extends Controller
 {
@@ -26,10 +27,11 @@ class SkillController extends Controller
         $success = true;
         $message = '';
         try {
-            $skill = $this->skillService->insertOne($request);
+            $skill = $this->skillService->insertOne($request->name);
         } catch (\Exception $e) {
             $success = false;
             $message = 'Моля, опитайте по-късно.';
+            Log::error($e->getMessage());
             $skill = null;
         }
 

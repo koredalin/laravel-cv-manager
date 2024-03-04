@@ -93,6 +93,7 @@
         <label for="skill_name_modal">Име на технология</label>
         <input type="text" id="skill_name_modal" name="skill_name_modal" class="form-control" required>
       </div>
+      <div id="skill_modal_errors" class="hidden red"></div>
       <button type="submit" class="btn btn-primary">Добави</button>
     </form>
   </div>

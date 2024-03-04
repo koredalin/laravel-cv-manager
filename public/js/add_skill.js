@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let addUniBtn = document.getElementById("add_skill");
+  let addSkillBtn = document.getElementById("add_skill");
   let skillModal = document.getElementById("skill_modal_container");
-  let closeUniModalBtn = document.getElementsByClassName("skill-close")[0];
-  let errorsModal = document.getElementById('skill_modal_errors');
+  let closeSkillModalBtn = document.getElementsByClassName("skill-close")[0];
+  let newSkillModalErrors = document.getElementById('skill_modal_errors');
 
-  addUniBtn.onclick = function () {
+  addSkillBtn.onclick = function () {
     skillModal.style.display = "block";
   };
 
-  closeUniModalBtn.onclick = function () {
+  closeSkillModalBtn.onclick = function () {
     closeSkillModal();
   };
 
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
       name: document.getElementById('skill_name_modal').value
     };
 
+    // Backend request.
     fetch('/api/skill/add_one', {
       method: 'POST',
       headers: {
@@ -36,9 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
       body: JSON.stringify(formData)
     })
       .then(response => {
-        errorsModal.innerHTML = '';
+        newSkillModalErrors.innerHTML = '';
         if (response.ok) {
-          errorsModal.classList.add('hidden');
+          newSkillModalErrors.classList.add('hidden');
 
           return response.json();
         }
@@ -52,34 +53,33 @@ document.addEventListener('DOMContentLoaded', function () {
         throw new Error('Network response was not ok');
       })
       .then(data => {
-        let errors = document.getElementById('skill_modal_errors');
-        errors.innerHTML = '';
+        newSkillModalErrors.innerHTML = '';
 //        console.log(data);
         if (!data.success) {
-          errors.innerHTML = data.message;
+          newSkillModalErrors.innerHTML = data.message;
           return;
         }
 
-        let skillNames = document.getElementById('skill');
-        let newUniOption = document.createElement('option');
-        newUniOption.value = data.skill.name;
-        skillNames.prepend(newUniOption);
+        let skillName = document.getElementById('skill');
+        let newSkillOption = document.createElement('option');
+        newSkillOption.value = data.skill.id;
+        newSkillOption.text = data.skill.name;
+        newSkillOption.selected = true;
+        skillName.prepend(newSkillOption);
         closeSkillModal();
       })
       .catch(errors => {
-        errorsModal.classList.remove('hidden');
-        console.error('Error:', errors);
+        newSkillModalErrors.classList.remove('hidden');
+//        console.error('Error:', errors);
         if (errors instanceof Error) {
           // System errors.
 //          console.error(errors.message);
           errors.innerHTML = errors.message;
         } else {
           // Validation errors.
-//        console.error(errors);
 //        console.log(errors.errors);
           Array.from(errors.errors).forEach((message) => {
-            console.log(message);
-            errorsModal.innerHTML += message + '</br>';
+            newSkillModalErrors.innerHTML += message + '</br>';
           });
         }
       });

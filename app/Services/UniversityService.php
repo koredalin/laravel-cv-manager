@@ -11,7 +11,7 @@ class UniversityService
         return University::whereRaw('LOWER(name) LIKE ?', ['%' . trim(mb_strtolower($query)) . '%'])->get();
     }
 
-    public function insertOne(string $name, string $assessment): ?University
+    public function insertOne(string $name, string $assessment): University
     {
         $universityObj = new University();
         $universityObj->name = trim($name);

@@ -6,12 +6,7 @@ use App\Models\Skill;
 
 class SkillService
 {
-    public function searchUniversities($query)
-    {
-        return Skill::whereRaw('LOWER(name) LIKE ?', ['%' . trim(mb_strtolower($query)) . '%'])->get();
-    }
-
-    public function insertOne(string $name): ?Skill
+    public function insertOne(string $name): Skill
     {
         $skill = new Skill();
         $skill->name = trim($name);
