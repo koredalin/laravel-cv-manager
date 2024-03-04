@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
-use App\Models\User;
-use App\Helpers\DateTimeHelper;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -25,19 +24,29 @@ class UserController extends Controller
             return response()->json(['errors' => $errorArray], 422);
         }
 
-        $user = $this->userService->findOneByNamesDob(
-            $request->name,
-            $request->middle_name,
-            $request->surname,
-            $request->dob
-        );
-        if (empty($user)) {
-            $user = $this->insertOne($request);
+        $success = true;
+        $message = '';
+        try {
+            $user = $this->userService->findOneByNamesDob(
+                $request->name,
+                $request->middle_name,
+                $request->surname,
+                $request->dob
+            );
+            if (empty($user)) {
+                $user = $this->userService->insertOne($request);
+            }
+        } catch (\Exception $e) {
+            $success = false;
+            $message = 'Моля, опитайте по-късно.';
+            Log::error($e->getMessage());
+            $user = null;
         }
 
         return response()->json([
-            'user' => $user ? $user : null,
-            'success' => true,
+            'user' => $user,
+            'success' => $success,
+            'message' => $message,
         ]);
     }
 
@@ -52,25 +61,5 @@ class UserController extends Controller
         $validator = ValidatorFacade::make($request->all(), $validationArray);
         
         return $validator;
-    }
-
-    private function insertOne(Request $request): ?User
-    {
-        $userObj = new User();
-        try {
-            $userObj->name = $request->name;
-            $userObj->middle_name = $request->middle_name;
-            $userObj->surname = $request->surname;
-            $userObj->dob = DateTimeHelper::createFromDate($request->dob);
-            $userObj->university_id = null;
-            $userObj->save();
-            $userObj->university = null;
-            $userObj->skills = null;
-            $userObj->cv = null;
-        } catch (\Exception $e) {
-            return null;
-        }
-        
-        return $userObj;
     }
 }

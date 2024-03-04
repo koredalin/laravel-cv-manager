@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use App\Models\User;
+use App\Helpers\DateTimeHelper;
 
 class UserService
 {
@@ -20,5 +22,20 @@ class UserService
             ->first();
 
         return $user;
+    }
+
+    public function insertOne(Request $request): ?User {
+        $userObj = new User();
+        $userObj->name = $request->name;
+        $userObj->middle_name = $request->middle_name;
+        $userObj->surname = $request->surname;
+        $userObj->dob = DateTimeHelper::createFromDate($request->dob);
+        $userObj->university_id = null;
+        $userObj->save();
+        $userObj->university = null;
+        $userObj->skills = null;
+        $userObj->cv = null;
+
+        return $userObj;
     }
 }
