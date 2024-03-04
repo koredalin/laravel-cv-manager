@@ -19,5 +19,8 @@ use App\Http\Controllers\CvController;
 //    return view('index', ['title' => 'Създаване на CV']);
 //});
 
-Route::get('/', [CvController::class, 'index'])
-    ->name('index');
+Route::get('/', [CvController::class, 'addOne'])
+    ->name('cv.add_one');
+
+Route::post('/cv/create_one', [CvController::class, 'createOne'])
+    ->name('cv.create_one');

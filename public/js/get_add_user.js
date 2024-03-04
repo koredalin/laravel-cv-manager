@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
       && Array.isArray(user.skills)
       && user.skills.length;
     if (hasSkills) {
-      let skillsOptions = document.getElementById('skill').options;
+      let skillsOptions = document.getElementById('skills').options;
       Array.from(skillsOptions).forEach((skillOpt) => {
         skillOpt.selected = false;
         user.skills.forEach((dbSkillObj) => {

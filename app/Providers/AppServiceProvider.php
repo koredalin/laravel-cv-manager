@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Services\UniversityService;
 use App\Services\UserService;
 use App\Services\SkillService;
+use App\Services\CvService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(SkillService::class, function ($app) {
             return new SkillService();
+        });
+
+        $this->app->bind(CvService::class, function ($app) {
+            return new CvService();
         });
     }
 

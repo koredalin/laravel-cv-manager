@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return;
         }
 
-        let skillName = document.getElementById('skill');
+        let skillName = document.getElementById('skills');
         let newSkillOption = document.createElement('option');
         newSkillOption.value = data.skill.id;
         newSkillOption.text = data.skill.name;
