@@ -79,7 +79,8 @@
         <label for="assessment_modal">Акредитационна оценка (0.00 - 10.00):</label>
         <input type="number" id="assessment_modal" name="assessment_modal" step="0.01" min="0" max="10" class="form-control" required>
       </div>
-      <button type="submit" class="btn btn-primary">Добави</button>
+      <div id="university_modal_errors" class="hidden red"></div>
+      <button type="submit" id="university_modal_submit" class="btn btn-primary">Добави</button>
     </form>
   </div>
 </div>

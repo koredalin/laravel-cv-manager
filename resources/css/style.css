@@ -16,6 +16,14 @@ h1 {
     text-align: center;
 }
 
+.hidden {
+    display: none;
+}
+
+.red {
+    color: red;
+}
+
 .form-container {
     min-width: 350px;
     max-width: 400px;

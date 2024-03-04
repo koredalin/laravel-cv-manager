@@ -5,20 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
-use App\Services\UniversityService;
+use App\Services\SkillService;
 
-class UniversityController extends Controller
+class SkillController extends Controller
 {
     public function __construct(
-        protected UniversityService $universityService
+        protected SkillService $skillService
     ) {}
-
-    public function searchByName(string $name)
-    {
-        $universities = $this->universityService->searchUniversities($name);
-        
-        return response()->json($universities);
-    }
 
     public function addOne(Request $request)
     {
@@ -33,18 +26,15 @@ class UniversityController extends Controller
         $success = true;
         $message = '';
         try {
-            $university = $this->universityService->insertOne(
-                $request->name,
-                $request->assessment
-            );
+            $skill = $this->skillService->insertOne($request);
         } catch (\Exception $e) {
             $success = false;
             $message = 'Моля, опитайте по-късно.';
-            $university = null;
+            $skill = null;
         }
 
         return response()->json([
-            'university' => $university,
+            'skill' => $skill,
             'success' => $success,
             'message' => $message,
         ]);
@@ -53,8 +43,7 @@ class UniversityController extends Controller
     private function addOneValidator(Request $request): Validator
     {
         $validationArray = [
-            'name' => 'required|unique:universities,name|string|max:255',
-            'assessment' => 'required|decimal:2|min:0.00|max:10.00',
+            'name' => 'required|unique:skills,name|string|max:255',
         ];
         $validator = ValidatorFacade::make($request->all(), $validationArray);
         

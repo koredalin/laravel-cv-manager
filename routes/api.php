@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UniversityController;
+use App\Http\Controllers\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,6 @@ Route::get('/university/search/{name}', [UniversityController::class, 'searchByN
 
 Route::post('/university/add_one', [UniversityController::class, 'addOne'])
     ->name('university.add_one');
+
+Route::post('/skill/add_one', [SkillController::class, 'addOne'])
+    ->name('skill.add_one');
