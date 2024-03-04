@@ -7,10 +7,14 @@ use Illuminate\Support\Facades\Validator as ValidatorFacade;
 use Illuminate\Validation\Validator;
 use App\Models\User;
 use App\Helpers\DateTimeHelper;
-use stdClass;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
+    public function __construct(
+        protected UserService $userService
+    ) {}
+    
     public function getAddOne(Request $request)
     {
         $validator = $this->getAddOneValidator($request);
@@ -21,8 +25,7 @@ class UserController extends Controller
             return response()->json(['errors' => $errorArray], 422);
         }
 
-        $userObj = new User();
-        $user = $userObj->findOneByNamesDob(
+        $user = $this->userService->findOneByNamesDob(
             $request->name,
             $request->middle_name,
             $request->surname,

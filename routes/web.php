@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CvController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +19,5 @@ use App\Http\Controllers\HomeController;
 //    return view('index', ['title' => 'Създаване на CV']);
 //});
 
-Route::get('/', [HomeController::class, 'index'])
+Route::get('/', [CvController::class, 'index'])
     ->name('index');

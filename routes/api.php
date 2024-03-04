@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UniversityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/user/get_add_one', [UserController::class, 'getAddOne'])
     ->name('user.get_add_one');
+
+Route::get('/university/search/{name}', [UniversityController::class, 'searchByName'])
+    ->name('university.search_by_name');
+
+Route::post('/university/add_one', [UniversityController::class, 'addOne'])
+    ->name('university.add_one');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 
-class HomeController extends Controller
+class CvController extends Controller
 {
     public function index()
     {

@@ -32,10 +32,7 @@
         <div class="form-control-container">
           <input list="universities_names" name="university_name" id="university_name" class="form-control" placeholder="Университет" />
           <datalist id="universities_names">
-            <option value="ue-varna">
-            <option value="tu-varna">
-            <option value="vsu-varna">
-            <option value="su-sofia">
+<!--            The options are filled automatically.-->
           </datalist>
           <input type="hidden" name="assessment" id="assessment" />
           <button id="add_university" type="button" class="btn btn-secondary">
@@ -102,6 +99,7 @@
 
 @push('scripts')
   <script src="/js/get_add_user.js"></script>
+  <script src="/js/fill_universities_names.js"></script>
   <script src="/js/add_university.js"></script>
   <script src="/js/add_skill.js"></script>
 @endpush
