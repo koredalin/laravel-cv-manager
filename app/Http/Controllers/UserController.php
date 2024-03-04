@@ -33,7 +33,7 @@ class UserController extends Controller
         }
 
         return response()->json([
-            'user' => $user ? $user : $userObj,
+            'user' => $user ? $user : null,
             'success' => true,
         ]);
     }
@@ -61,9 +61,9 @@ class UserController extends Controller
             $userObj->dob = DateTimeHelper::createFromDate($request->dob);
             $userObj->university_id = null;
             $userObj->save();
-            $userObj->university = new stdClass();
-            $userObj->skills = new stdClass();
-            $userObj->cv = new stdClass();
+            $userObj->university = null;
+            $userObj->skills = null;
+            $userObj->cv = null;
         } catch (\Exception $e) {
             return null;
         }

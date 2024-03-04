@@ -30,8 +30,8 @@
     <div class="form-group">
         <label for="university_name" class="form-label">Университет</label>
         <div class="form-control-container">
-          <input list="universities" name="university_name" id="university_name" class="form-control" placeholder="Университет" />
-          <datalist id="universities">
+          <input list="universities_names" name="university_name" id="university_name" class="form-control" placeholder="Университет" />
+          <datalist id="universities_names">
             <option value="ue-varna">
             <option value="tu-varna">
             <option value="vsu-varna">
@@ -51,11 +51,10 @@
     <div class="form-group">
       <label for="skills">Име на технология</label>
       <div class="form-control-container">
-        <select name="skills" id="skills" class="form-control" multiple>
-          <option value="1">Volvo</option>
-          <option value="2">Saab</option>
-          <option value="3">Opel</option>
-          <option value="4">Audi</option>
+        <select name="skill" id="skill" class="form-control" multiple>
+          @foreach ($skills as $skill)
+            <option value="{{ $skill->id }}">{{ $skill->name }}</option>
+          @endforeach
         </select>
         <button id="add_skill" type="button" class="btn btn-secondary">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">

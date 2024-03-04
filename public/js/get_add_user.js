@@ -14,13 +14,11 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    requestPending = true;
-
     const userData = {
       name: name.value,
       middle_name: middleName.value,
       surname: surname.value,
-      dob: dob.value,
+      dob: dob.value
     };
 
     fetch('/api/user/get_add_one', {
@@ -39,13 +37,51 @@ document.addEventListener('DOMContentLoaded', function () {
       const clonedResponse = response.clone();
       clonedResponse.json().then(data => {
         console.log("Data:", data);
-        // TODO - Form population if an user with filled CV exists.
+        populateUniversitySkills(data);
       }).catch(error => console.error('Error processing JSON:', error));
     })
     .catch(error => console.error('Error:', error));
   }
 
   window.checkUserExistence = checkUserExistence;
+  
+  function populateUniversitySkills(data) {
+    let emptyUser = !data.hasOwnProperty('user') || !data.user;
+    // We do nothing on an empty response.
+    if (emptyUser) {
+      return;
+    }
+    
+    let user = data.user;
+    
+    let isUniversity = user.hasOwnProperty('university')
+      && user.university
+      && user.university.hasOwnProperty('name')
+      && user.university.name.length;
+    if (isUniversity) {
+      let uniesGrid = document.getElementById('universities_names');
+      let newOption = document.createElement('option');
+      newOption.selected = true;
+      newOption.value = user.university.name;
+      uniesGrid.prepend(newOption);
+    }
+
+    let hasSkills = user.hasOwnProperty('skills')
+      && user.skills
+      && Array.isArray(user.skills)
+      && user.skills.length;
+    if (hasSkills) {
+      let skillsOptions = document.getElementById('skill').options;
+      Array.from(skillsOptions).forEach((skillOpt) => {
+        skillOpt.selected = false;
+        user.skills.forEach((dbSkillObj) => {
+          if (skillOpt.value && dbSkillObj.id && parseInt(skillOpt.value ?? 0) === parseInt(dbSkillObj.id ?? 0)) {
+            skillOpt.selected = true;
+          }
+        });
+      });
+    }
+  }
 
   [name, middleName, surname].forEach(element => {
     element.addEventListener('change', checkUserExistence);
