@@ -49,6 +49,9 @@ class CvController extends Controller
             ])
             ->first();
         $user->university_id = $university->id;
+        $user->updated_at = DateTimeHelper::getDateTimeObj();
+        $user->save();
+        
         $user->university = $university;
 
         $user->skills()->sync($validatedData['skills']);
@@ -93,6 +96,35 @@ class CvController extends Controller
         $title = 'Търсене на CV по дата на раждане';
 
         return view('cvs.search_by_dobs', compact(
+            'users',
+            'title')
+        );
+    }
+
+    public function ageSkillsReport(Request $request)
+    {
+        $validatedData = $this->getSearchByDobsValidatedData($request);
+        $dobFrom = $validatedData['dob_from'] ?? null;
+        $dobTo = $validatedData['dob_to'] ?? null;
+//        print_r($request->all());
+//        var_dump($dobFrom);
+//        var_dump($dobTo);
+        if (!empty($dobFrom)) {
+            if (empty($dobTo)) {
+                $dobTo = DateTimeHelper::getDateTimeObj()->format('Y-m-d');
+            }
+            $users = $this->userService
+                ->findAgeSkillsReportBuilder($dobFrom, $dobTo)
+                ->paginate(self::RECORDS_PER_PAGE);
+        } else {
+            $users = $this->userService
+                ->findAllAgeSkillsReportBuilder()
+                ->paginate(self::RECORDS_PER_PAGE);
+        }
+
+        $title = 'Търсене на CV по дата на раждане';
+
+        return view('cvs.age_skills_report', compact(
             'users',
             'title')
         );

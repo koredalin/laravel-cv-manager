@@ -62,7 +62,8 @@
   </div>
 </div>
 
-<div id="internal_links">
-    <?php //<p><a href="{{ route('statistics') }}">Statistics</a></p> ?>
+<div id="internal_links" class="text-center">
+    <p><a href="{{ route('cv.add_one') }}">Създаване на CV</a></p>
+    <p><a href="{{ route('cv.age_skills_report') }}">Справка по възраст и умения</a></p>
 </div>
 @endsection

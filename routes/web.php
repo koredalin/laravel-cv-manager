@@ -27,3 +27,6 @@ Route::post('/cv/create_one', [CvController::class, 'createOne'])
 
 Route::get('/cv/search_by_dobs', [CvController::class, 'searchByDobs'])
     ->name('cv.search_by_dobs');
+
+Route::get('/cv/age_skills_report', [CvController::class, 'ageSkillsReport'])
+    ->name('cv.age_skills_report');
