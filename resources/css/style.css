@@ -86,3 +86,32 @@ h1 {
   text-decoration: none;
   cursor: pointer;
 }
+
+#cvs_table {
+    margin: 20px auto 30px auto;
+}
+
+#cvs_table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+#cvs_table, th, td {
+    padding: 0 10px;
+}
+
+#cvs_table .th-unaswered-questions {
+    width: 200px;
+}
+
+.questionnaires-list-title {
+    margin-top: 60px;
+}
+
+#internal_links {
+    margin-top: 34px;
+}
+
+#cvs_container {
+    margin-top: 55px;
+}

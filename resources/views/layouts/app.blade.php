@@ -29,7 +29,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript">
   $(function () {
-    $('#dob_datepicker').datepicker({
+    $('#dob_datepicker, #dob_from_datepicker, #dob_to_datepicker').datepicker({
       format: 'yyyy-mm-dd'
     })
     .on('changeDate', function (e) {

@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Helpers\DateTimeHelper;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserService
 {
@@ -37,5 +38,27 @@ class UserService
         $userObj->cv = null;
 
         return $userObj;
+    }
+
+    public function findByDobsPeriodBuilder(
+        string $dobFrom,
+        string $dobTo
+    ): Builder {
+        $user = User::with(['university', 'skills', 'cv'])
+            ->leftJoin('cvs', 'users.id', '=', 'cvs.user_id')
+            ->where('dob', '>=', $dobFrom)
+            ->where('dob', '<=', $dobTo)
+            ->orderBy('users.dob')
+            ->orderBy('cvs.created_at')
+            ->select('users.*');
+
+        return $user;
+    }
+
+    public function findAllBuilder(): Builder
+    {
+        $user = User::with(['university', 'skills', 'cv']);
+
+        return $user;
     }
 }

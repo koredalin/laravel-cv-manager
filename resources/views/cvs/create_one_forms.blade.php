@@ -1,9 +1,3 @@
-@if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
-
 <form action="{{ route('cv.create_one') }}" method="POST" class="form-container">
   @csrf
 
@@ -78,7 +72,7 @@
   @endif
 
   <div class="form-row">
-    <input type="submit" name="cv_submit" id="cv_submit" class="form-control" value="Запис на CV">
+    <input type="submit" id="cv_submit" class="form-control" value="Запис на CV">
   </div>
 </form>
 
