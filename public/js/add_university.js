@@ -55,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(data => {
         newUniModalErrors.innerHTML = '';
-//        console.log(data);
         if (!data.success) {
           newUniModalErrors.innerHTML = data.message;
           return;
@@ -69,16 +68,12 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(errors => {
         newUniModalErrors.classList.remove('hidden');
-        console.error('Error:', errors);
         if (errors instanceof Error) {
           // System errors.
-//          console.error(errors.message);
           errors.innerHTML = errors.message;
         } else {
           // Validation errors.
-//        console.log(errors.errors);
           Array.from(errors.errors).forEach((message) => {
-            console.log(message);
             newUniModalErrors.innerHTML += message + '</br>';
           });
         }

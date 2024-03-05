@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const clonedResponse = response.clone();
       clonedResponse.json().then(data => {
-        console.log("Data:", data);
         populateUniversitySkills(data);
       }).catch(error => console.error('Error processing JSON:', error));
     })

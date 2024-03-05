@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .then(data => {
         newSkillModalErrors.innerHTML = '';
-//        console.log(data);
         if (!data.success) {
           newSkillModalErrors.innerHTML = data.message;
           return;
@@ -70,14 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
       })
       .catch(errors => {
         newSkillModalErrors.classList.remove('hidden');
-//        console.error('Error:', errors);
         if (errors instanceof Error) {
           // System errors.
-//          console.error(errors.message);
           errors.innerHTML = errors.message;
         } else {
           // Validation errors.
-//        console.log(errors.errors);
           Array.from(errors.errors).forEach((message) => {
             newSkillModalErrors.innerHTML += message + '</br>';
           });

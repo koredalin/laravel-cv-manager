@@ -77,12 +77,11 @@ class CvController extends Controller
         $validatedData = $this->getSearchByDobsValidatedData($request);
         $dobFrom = $validatedData['dob_from'] ?? null;
         $dobTo = $validatedData['dob_to'] ?? null;
-//        print_r($request->all());
-//        var_dump($dobFrom);
-//        var_dump($dobTo);
         if (!empty($dobFrom)) {
             if (empty($dobTo)) {
-                $dobTo = DateTimeHelper::getDateTimeObj()->format('Y-m-d');
+                $dobToObj = DateTimeHelper::getDateTimeObj();
+                $dobToObj->modify('+1 day');
+                $dobTo = $dobToObj->format('Y-m-d');
             }
             $users = $this->userService
                 ->findByDobsPeriodBuilder($dobFrom, $dobTo)
@@ -93,7 +92,7 @@ class CvController extends Controller
                 ->paginate(self::RECORDS_PER_PAGE);
         }
 
-        $title = 'Търсене на CV по дата на раждане';
+        $title = 'Търсене на CV по период на раждане';
 
         return view('cvs.search_by_dobs', compact(
             'users',
@@ -103,18 +102,17 @@ class CvController extends Controller
 
     public function ageSkillsReport(Request $request)
     {
-        $validatedData = $this->getSearchByDobsValidatedData($request);
-        $dobFrom = $validatedData['dob_from'] ?? null;
-        $dobTo = $validatedData['dob_to'] ?? null;
-//        print_r($request->all());
-//        var_dump($dobFrom);
-//        var_dump($dobTo);
-        if (!empty($dobFrom)) {
-            if (empty($dobTo)) {
-                $dobTo = DateTimeHelper::getDateTimeObj()->format('Y-m-d');
+        $validatedData = $this->getAgeSkillsReportValidatedData($request);
+        $cvCreatedAtFrom = $validatedData['cv_created_at_from'] ?? null;
+        $cvCreatedAtTo = $validatedData['cv_created_at_to'] ?? null;
+        if (!empty($cvCreatedAtFrom)) {
+            if (empty($cvCreatedAtTo)) {
+                $cvCreatedAtToObj = DateTimeHelper::getDateTimeObj();
+                $cvCreatedAtToObj->modify('+1 day');
+                $cvCreatedAtTo = $cvCreatedAtToObj->format('Y-m-d');
             }
             $users = $this->userService
-                ->findAgeSkillsReportBuilder($dobFrom, $dobTo)
+                ->findAgeSkillsReportBuilder($cvCreatedAtFrom, $cvCreatedAtTo)
                 ->paginate(self::RECORDS_PER_PAGE);
         } else {
             $users = $this->userService
@@ -122,7 +120,7 @@ class CvController extends Controller
                 ->paginate(self::RECORDS_PER_PAGE);
         }
 
-        $title = 'Търсене на CV по дата на раждане';
+        $title = 'Справка по възраст и умения';
 
         return view('cvs.age_skills_report', compact(
             'users',
@@ -148,8 +146,18 @@ class CvController extends Controller
     private function getSearchByDobsValidatedData(Request $request): array
     {
         $validatedData = $request->validate([
-            'dob_from' => 'date_format:Y-m-d',
-            'dob_to' => 'date_format:Y-m-d',
+            'dob_from' => 'nullable|date_format:Y-m-d',
+            'dob_to' => 'nullable|date_format:Y-m-d',
+        ]);
+        
+        return $validatedData;
+    }
+
+    private function getAgeSkillsReportValidatedData(Request $request): array
+    {
+        $validatedData = $request->validate([
+            'cv_created_at_from' => 'nullable|date_format:Y-m-d',
+            'cv_created_at_to' => 'nullable|date_format:Y-m-d',
         ]);
         
         return $validatedData;

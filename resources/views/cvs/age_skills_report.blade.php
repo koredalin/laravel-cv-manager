@@ -43,6 +43,6 @@
 
 <div id="internal_links" class="text-center">
     <p><a href="{{ route('cv.add_one') }}">Създаване на CV</a></p>
-    <p><a href="{{ route('cv.search_by_dobs') }}">Справка по възраст и умения</a></p>
+    <p><a href="{{ route('cv.search_by_dobs') }}">Търсене на CV по период на раждане</a></p>
 </div>
 @endsection

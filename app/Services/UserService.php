@@ -65,19 +65,19 @@ class UserService
     }
 
     public function findAgeSkillsReportBuilder(
-        string $dobFrom,
-        string $dobTo
+        string $cvCreatedAtFrom,
+        string $cvCreatedAtTo
     ): DbBuilder {
         $user = DB::table('users')
             ->join('cvs', 'users.id', '=', 'cvs.user_id')
-            ->join('user_skills', 'users.id', '=', 'user_skills.user_id')
-            ->join('skills', 'user_skills.skill_id', '=', 'skills.id')
+            ->join('users_skills', 'users.id', '=', 'users_skills.user_id')
+            ->join('skills', 'users_skills.skill_id', '=', 'skills.id')
             ->select(
                 DB::raw('YEAR(CURDATE()) - YEAR(users.dob) AS age'),
                 DB::raw('COUNT(DISTINCT users.id) AS candidates_count'),
                 DB::raw('GROUP_CONCAT(DISTINCT skills.name ORDER BY skills.name ASC SEPARATOR \', \') AS skills_list')
             )
-            ->whereBetween('cvs.created_at', [$dobFrom, $dobTo])
+            ->whereBetween('cvs.created_at', [$cvCreatedAtFrom, $cvCreatedAtTo])
             ->groupBy('age')
             ->orderBy('age');
 

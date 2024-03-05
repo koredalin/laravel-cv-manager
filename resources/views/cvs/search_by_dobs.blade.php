@@ -32,6 +32,9 @@
       </thead>
       <tbody>
         @foreach($users as $user)
+          @if (empty($user->cv))
+            @continue
+          @endif
           @php
             $skillsNames = [];
           @endphp

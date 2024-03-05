@@ -2,20 +2,20 @@
   @csrf
 
   <div class="form-group">
-    <label>От дата на раждане</label>
-    <div id="dob_from_datepicker" class="input-group date">
-      <input type='text' class="form-control" name="dob_from" id="dob_from" placeholder="Дата на раждане" value="{{ old('dob_from') }}" />
-      <span id="dob_from_icon" class="input-group-addon">
+    <label>Начална дата на кандидатстване</label>
+    <div id="cv_created_at_from_datepicker" class="input-group date">
+      <input type='text' class="form-control" name="cv_created_at_from" id="cv_created_at_from" placeholder="Дата на кандидатстване" value="{{ old('cv_created_at_from') }}" />
+      <span id="cv_created_at_from_icon" class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
   </div>
 
   <div class="form-group">
-    <label>До дата на раждане</label>
-    <div id="dob_to_datepicker" class="input-group date">
-      <input type='text' class="form-control" name="dob_to" id="dob_to" placeholder="Дата на раждане" value="{{ old('dob_to') }}" />
-      <span id="dob_to_icon" class="input-group-addon">
+    <label>Крайна дата на кандидатстване</label>
+    <div id="cv_created_at_to_datepicker" class="input-group date">
+      <input type='text' class="form-control" name="cv_created_at_to" id="cv_created_at_to" placeholder="Дата на кандидатстване" value="{{ old('cv_created_at_to') }}" />
+      <span id="cv_created_at_to_icon" class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
