@@ -11,6 +11,6 @@ class Skill extends Model
 
     // The relation to User model, table.
     public function users() {
-        return $this->belongsToMany(User::class, 'users_skills', 'skill_id', 'user_id');
+        return $this->belongsToMany(User::class)->using(SkillUser::class)->withTimestamps();
     }
 }

@@ -51,8 +51,6 @@ class CvController extends Controller
         $user->university_id = $university->id;
         $user->updated_at = DateTimeHelper::getDateTimeObj();
         $user->save();
-        
-        $user->university = $university;
 
         $user->skills()->sync($validatedData['skills']);
 

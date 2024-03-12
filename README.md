@@ -25,7 +25,7 @@ This is a web-based quiz application built using Laravel 10 and ES6. It allows u
 - `universities`.
 - `users`.
 - `skills`.
-- `users_skills` - The table relates users and skills tables. The relation is "many to many".
+- `skill_user` - The table relates users and skills tables. The relation is "many to many".
 - `cvs`.
 
 ## Future Improvements
@@ -46,8 +46,8 @@ This is a web-based quiz application built using Laravel 10 and ES6. It allows u
    - `php artisan db:seed --class=UniversitySeeder`: Seed the database with seeder class `UniversitySeeder`.
    - `php artisan db:seed --class=UserSeeder`: Seed the database with seeder class `UserSeeder`.
    - `php artisan db:seed --class=SkillSeeder`: Seed the database with seeder class `SkillSeeder`.
-   - `php artisan db:seed --class=UserSkillSeeder`: Seed the database with seeder class `UserSkillSeeder`.
-   - `php artisan db:seed --class=CvsSeeder`: Seed the database with seeder class `CvsSeeder`.
+   - `php artisan db:seed --class=SkillUserSeeder`: Seed the database with seeder class `SkillUserSeeder`.
+   - `php artisan db:seed --class=CvSeeder`: Seed the database with seeder class `CvSeeder`.
 6. Run the following commands to start the local servers:
    - `php artisan serve`: Starts the php server.
    - Start a MySql server on your local machine.

@@ -70,8 +70,8 @@ class UserService
     ): DbBuilder {
         $user = DB::table('users')
             ->join('cvs', 'users.id', '=', 'cvs.user_id')
-            ->join('users_skills', 'users.id', '=', 'users_skills.user_id')
-            ->join('skills', 'users_skills.skill_id', '=', 'skills.id')
+            ->join('skill_user', 'users.id', '=', 'skill_user.user_id')
+            ->join('skills', 'skill_user.skill_id', '=', 'skills.id')
             ->select(
                 DB::raw('YEAR(CURDATE()) - YEAR(users.dob) AS age'),
                 DB::raw('COUNT(DISTINCT users.id) AS candidates_count'),
@@ -87,8 +87,8 @@ class UserService
     public function findAllAgeSkillsReportBuilder(): DbBuilder {
         $user = DB::table('users')
             ->join('cvs', 'users.id', '=', 'cvs.user_id')
-            ->join('users_skills', 'users.id', '=', 'users_skills.user_id')
-            ->join('skills', 'users_skills.skill_id', '=', 'skills.id')
+            ->join('skill_user', 'users.id', '=', 'skill_user.user_id')
+            ->join('skills', 'skill_user.skill_id', '=', 'skills.id')
             ->select(
                 DB::raw('YEAR(CURDATE()) - YEAR(users.dob) AS age'),
                 DB::raw('COUNT(DISTINCT users.id) AS candidates_count'),
